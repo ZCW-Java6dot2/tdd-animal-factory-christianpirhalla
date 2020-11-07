@@ -3,7 +3,11 @@ package rocks.zipcodewilmington;
 import org.junit.Assert;
 import org.junit.Test;
 import rocks.zipcodewilmington.animals.Cat;
+import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_storage.CatHouse;
+import rocks.zipcodewilmington.animals.animal_storage.DogHouse;
+
+import java.util.Date;
 
 /**
  * @author leon on 4/19/18.
@@ -13,7 +17,7 @@ public class CatHouseTest {
     @Test
     public void addTest() {
         // given
-        Cat expected = new Cat();
+        Cat expected = new Cat(null, null, 302);
         Integer id = expected.getId();
 
         // when
@@ -28,7 +32,7 @@ public class CatHouseTest {
     @Test
     public void removeTest() {
         // given
-        Cat catToBeAdded = new Cat(null, null, 0);
+        Cat catToBeAdded = new Cat(null, null, 303);
         CatHouse.add(catToBeAdded);
         Integer id = catToBeAdded.getId();
 
@@ -45,7 +49,7 @@ public class CatHouseTest {
     @Test
     public void removeByCatTest() {
         // given
-        Cat catToBeAdded = new Cat(null, null, 0);
+        Cat catToBeAdded = new Cat(null, null, 304);
         CatHouse.add(catToBeAdded);
         Integer id = catToBeAdded.getId();
 
@@ -57,11 +61,28 @@ public class CatHouseTest {
         Assert.assertNull(retrievedCat);
     }
 
+    @Test
+    public void getCatByIdTest(){
+        //Given
+        Cat expectedCat = new Cat("ferb", null, 305);
+        CatHouse.add(expectedCat);
+        Integer id = expectedCat.getId();
+
+        //When
+        Cat actualCat = CatHouse.getCatById(id);
+
+        //Then
+        Assert.assertEquals(expectedCat, actualCat);
+
+
+    }
+
     // TODO - Create tests for `Integer getNumberOfCats()`
     @Test
     public void getNumberOfCatsTest() {
         // given there is a cat to be added
-        Cat cat = new Cat();
+        Cat cat = new Cat("Felix", new Date(), 306);
+        //NOTE: this was originally just a cat with a null ID! d
 
         // given that I count number of cats before add
         int numberOfCatsBeforeAdd = CatHouse.getNumberOfCats();
